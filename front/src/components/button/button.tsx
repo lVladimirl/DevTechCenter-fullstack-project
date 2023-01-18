@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { width } from "styled-system";
 
 const buttonVariants = {
   default: { backgroundColor: "var(--primary-color)", color: "var(--grey-0)" },
@@ -7,11 +6,12 @@ const buttonVariants = {
   negative: { backgroundColor: "var(--primary-color-negative)", color: "var(--grey-0)" },
   disable: { backgroundColor: "var(--grey-1)", color: "var(--grey-0)" },
   disable_hover: { backgroundColor: "var(--grey-2)", color: "var(--grey-0)" },
-  text_button: { backgroundColor: "var(--grey-2)", color: "var(--grey-0)" },
-  text_button_hover: { backgroundColor: "var(--grey-1)", color: "var(--grey-0)" }
+  text_button: { backgroundColor: "var(--grey-3)", color: "var(--grey-0)" },
+  text_button_hover: { backgroundColor: "var(--grey-2)", color: "var(--grey-0)" }
 };
 
 const buttonSizes = {
+  lesser:{ width: "25px", height: "25px" },
   small: { width: "119px", height: "38px" },
   medium: { width: "133px", height: "43px" },
   large: { width: "146px", height: "48px" },

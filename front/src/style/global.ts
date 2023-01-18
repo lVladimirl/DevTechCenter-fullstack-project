@@ -32,10 +32,11 @@ export const GlobalStyle = createGlobalStyle`
         --heading-2-600: normal normal 600 16px 'Lexend', sans-serif;
         --heading-3-600: normal normal 600 16px 'Lexend', sans-serif;
         --headline-1-400: normal normal 400 14px 'Lexend', sans-serif;
-        --headline-2-600: normal normal 600 14px 'Lexend', sans-serif;
+        --headline-2-700: normal normal 700 14px 'Lexend', sans-serif;
         --body-1-400: normal normal 400 12px 'Inter', sans-serif;
         --button-big-text: normal normal 600 16px 'Inter', sans-serif;
         --button-medium-text: normal normal 600 14px 'Inter', sans-serif;
+        --tech-title-700: normal normal 700 14px 'Inter', sans-serif;
         --input-placeholder:normal normal 400 16px 'Inter', sans-serif;
         --input-label:normal normal 500 14px 'Inter', sans-serif;
     }
@@ -51,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     body { 
         
         font-family: 'Lexend', sans-serif;
-        background-color: var(--grey-3);
+        background-color: var(--grey-4);
         display:flex;
         flex-flow: column;
         
