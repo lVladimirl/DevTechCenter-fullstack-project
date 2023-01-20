@@ -19,10 +19,6 @@ export const BoxNav = styled.nav`
     align-items: center;
     justify-content: space-between;
   }
-  h1 {
-    color: var(--primary-color);
-    font: var(--heading-1-700);
-  }
   @media (max-width: 780px) {
     background-color: var(--grey-4);
     div {

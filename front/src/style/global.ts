@@ -1,6 +1,4 @@
-
-import { createGlobalStyle } from  "styled-components"
-
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     *{
@@ -28,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
  
 
         //Typography
-        --heading-1-700: normal normal 700 16px '', sans-serif;
+        --heading-1-700: normal normal 700 24px '', sans-serif;
         --heading-2-600: normal normal 600 16px 'Lexend', sans-serif;
         --heading-3-600: normal normal 600 16px 'Lexend', sans-serif;
         --headline-1-400: normal normal 400 14px 'Lexend', sans-serif;
@@ -56,6 +54,5 @@ export const GlobalStyle = createGlobalStyle`
         display:flex;
         flex-flow: column;
         
-    }   
-
-`
+    }
+`;
