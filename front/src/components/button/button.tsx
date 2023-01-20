@@ -14,7 +14,7 @@ const buttonSizes = {
   lesser:{ width: "25px", height: "25px" },
   small: { width: "119px", height: "38px" },
   medium: { width: "133px", height: "43px" },
-  large: { width: "146px", height: "48px" },
+  large: { width: "90%", height: "48px" },
 };
 interface ButtonProps {
   variant: keyof typeof buttonVariants;

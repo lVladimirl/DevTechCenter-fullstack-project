@@ -5,8 +5,6 @@ export const InputStyled = styled.div`
     display: flex;
     flex-direction: column;
 
-    margin-top: 24px;
-
     label {
         
         font: var(--input-label)
@@ -19,6 +17,7 @@ export const InputStyled = styled.div`
     input {
         
         width: 486px;
+        height: 48px;
         padding: 8px 10px;
         
         border-radius: 4px;
@@ -38,8 +37,6 @@ export const InputStyled = styled.div`
         
         color: var(--negative);
         opacity: 87%;
-        margin-top: 8px;
-
     }
 
     .propsCar {
