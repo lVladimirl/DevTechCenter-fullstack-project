@@ -45,7 +45,7 @@ export const TechHeader = styled.div`
     align-items: center;
 
     margin: auto;
-    padding: 25px;
+    padding: 25px 1px;
     width: 300px;
     height: auto;
     border-radius: 4px;
