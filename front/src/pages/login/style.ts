@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const LoginBox = styled.div`
+export const FormBox = styled.div`
   @media (max-width: 780px) {
     display: flex;
     flex-direction: column;
 
     width: 90%;
-    height: 560px;
+    height: auto;
+    
 
     border-radius: 4px;
 
@@ -23,7 +24,7 @@ export const LoginBox = styled.div`
       flex-direction: column;
 
       background-color: var(--grey-3);
-      height: 500px;
+      height: auto;
       padding: 25px 0px;
       box-sizing: border-box;
     }
@@ -52,7 +53,7 @@ export const LoginBox = styled.div`
   flex-direction: column;
 
   width: 370px;
-  height: 560px;
+  height: auto;
 
   border-radius: 4px;
 
@@ -69,7 +70,7 @@ export const LoginBox = styled.div`
     flex-direction: column;
 
     background-color: var(--grey-3);
-    height: 500px;
+    height: auto;
     padding: 25px 0px;
     box-sizing: border-box;
   }
@@ -94,3 +95,16 @@ export const LoginBox = styled.div`
     text-decoration: underline;
   }
 `;
+export const FormHeader = styled.div`
+display:flex;
+justify-content: space-between;
+h1 {
+  margin: 50px 0px 40px;
+  align-self: center;
+  height: auto;
+}
+button{
+  width:70px;
+  margin: 50px 0px 40px;  
+}
+`

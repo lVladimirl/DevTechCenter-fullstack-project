@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button/button";
 import { Input } from "../../components/input/input";
-import { LoginBox } from "./style";
+import { FormBox } from "./style";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const Login = () => {
 
   return (
     <>
-      <LoginBox>
+      <FormBox>
         <h1>BrandName</h1>
         <form onSubmit={(e) => hadleSubmit(e)}>
           <h2>Login</h2>
@@ -43,7 +43,7 @@ export const Login = () => {
             {" "}
             Entrar
           </Button>
-          <span>Ja possui conta?</span>
+          <span>Não possui conta?</span>
           <Button
             type="button"
             variant="disable"
@@ -55,7 +55,7 @@ export const Login = () => {
             Cadastre-se
           </Button>
         </form>
-      </LoginBox>
+      </FormBox>
     </>
   );
 };
