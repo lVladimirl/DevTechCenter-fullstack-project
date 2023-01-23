@@ -7,7 +7,6 @@ export const FormBox = styled.div`
 
     width: 90%;
     height: auto;
-    
 
     border-radius: 4px;
 
@@ -96,15 +95,15 @@ export const FormBox = styled.div`
   }
 `;
 export const FormHeader = styled.div`
-display:flex;
-justify-content: space-between;
-h1 {
-  margin: 50px 0px 40px;
-  align-self: center;
-  height: auto;
-}
-button{
-  width:70px;
-  margin: 50px 0px 40px;  
-}
-`
+  display: flex;
+  justify-content: space-between;
+  h1 {
+    margin: 50px 0px 40px;
+    align-self: center;
+    height: auto;
+  }
+  button {
+    width: 70px;
+    margin: 50px 0px 40px;
+  }
+`;
