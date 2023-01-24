@@ -1,10 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button/button";
+import * as React from "react";
+import { State } from "../../interface";
 import { Input } from "../../components/input/input";
+import { Button } from "../../components/button/button";
+import { useNavigate } from "react-router-dom";
+import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
 import { FormBox, FormHeader } from "../login/style";
-
 export const Register = () => {
   const navigate = useNavigate();
+
+  const [state, setState] = React.useState<State>({
+    isOpenAlert: false,
+    vertical: "top",
+    horizontal: "right",
+  });
+  const { vertical, horizontal, isOpenAlert } = state;
+
+  const handleClose = () => {
+    setState({ ...state, isOpenAlert: false });
+  };
 
   const sendToLogin = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -14,10 +27,12 @@ export const Register = () => {
   const hadleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("send info to yup");
+    setState({ isOpenAlert: true, vertical: "top", horizontal: "right"});
   };
 
   return (
     <>
+    <SnackBarAlert isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={{message:"s", status:4}} />
       <FormBox>
         <FormHeader >
           <h1>BrandName</h1>

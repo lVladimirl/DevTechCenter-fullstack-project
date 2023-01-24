@@ -11,6 +11,9 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState<string>("");
   const [techData, setTechData] = useState<any>();
+  
+  const state: any = useSelector((state) => state);
+  const navigate = useNavigate();
 
   const handleModal = ({ typeOfForm, techData }: ModalHandlerProps) => {
     if (typeOfForm) {
@@ -19,9 +22,6 @@ export const Home = () => {
     setIsOpen(!isOpen);
     setTechData(techData)
   };
-
-  const state: any = useSelector((state) => state);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (state.user.user === "") {

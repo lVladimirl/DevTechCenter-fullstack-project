@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
-
+import { SnackbarOrigin } from "@mui/material";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   type?: string;
@@ -37,3 +37,9 @@ export interface ModalTechsProps {
 export interface TechHeaderModal {
   handleModal: ({typeOfForm, techData}:ModalHandlerProps) => void;
 }
+
+export interface State extends SnackbarOrigin {
+  isOpenAlert: boolean;
+}
+
+

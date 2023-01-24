@@ -1,10 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button/button";
+import * as React from "react";
 import { Input } from "../../components/input/input";
+import { State } from "../../interface";
+import { Button } from "../../components/button/button";
 import { FormBox } from "./style";
+import { useNavigate } from "react-router-dom";
+import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [state, setState] = React.useState<State>({
+    isOpenAlert: false,
+    vertical: "top",
+    horizontal: "right",
+  });
+  const { vertical, horizontal, isOpenAlert } = state;
+
+  const handleClose = () => {
+    setState({ ...state, isOpenAlert: false });
+  };
 
   const sendToRegister = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -14,10 +27,12 @@ export const Login = () => {
   const hadleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("send info to yup");
+    setState({ isOpenAlert: true, vertical: "top", horizontal: "right"});
   };
 
   return (
     <>
+    <SnackBarAlert isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={{message:"s", status:4}} />
       <FormBox>
         <h1>BrandName</h1>
         <form onSubmit={(e) => hadleSubmit(e)}>
