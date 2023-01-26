@@ -4,13 +4,10 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { Snackbar } from "@mui/material";
 import { State } from "../../interface";
 
-export interface SnackBarProp extends State  {
-    handleClose:() => void;
-    isOpenAlert: boolean;
-    error?: {
-        status?: number;
-        message?: string;
-    }
+export interface SnackBarProp extends State {
+  handleClose: () => void;
+  isOpenAlert: boolean;
+  ResponseType: any;
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -20,7 +17,14 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export const SnackBarAlert = ({isOpenAlert, vertical, horizontal, handleClose }:SnackBarProp ): ReactElement => {
+export const SnackBarAlert = ({
+  isOpenAlert,
+  vertical,
+  horizontal,
+  handleClose,
+  ResponseType,
+  error
+}: SnackBarProp): ReactElement => {
   return (
     <Snackbar
       anchorOrigin={{ vertical, horizontal }}
@@ -29,12 +33,15 @@ export const SnackBarAlert = ({isOpenAlert, vertical, horizontal, handleClose }:
       message="I love snacks"
       key={vertical + horizontal}
     >
-      <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-        This is an error message!
-      </Alert>
-      {/* <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          This is a success message!
-        </Alert> */}
+      {ResponseType === "error" ? (
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+         {error?.status} {error?.message} 
+        </Alert>
+      ) : (
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Sucess Message
+        </Alert>
+      )}
     </Snackbar>
   );
 };

@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import { SnackbarOrigin } from "@mui/material";
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   type?: string;
@@ -32,6 +33,8 @@ export interface ModalTechsProps {
     name: string;
     status: string;
   }
+  setState: any;
+
 }
 
 export interface TechHeaderModal {
@@ -40,6 +43,30 @@ export interface TechHeaderModal {
 
 export interface State extends SnackbarOrigin {
   isOpenAlert: boolean;
+  ResponseType: string;
+  error?: {
+    status?: number;
+    message?: string;
+  };
 }
 
+export interface RegisterFormValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  bio: string;
+  contact: string;
+  status: string;
+};
+
+export interface LoginFormValues {
+  email: string;
+  password: string;
+};
+
+export interface TechFormValues {
+  Techname: string;
+  Techstatus: string;
+};
 
