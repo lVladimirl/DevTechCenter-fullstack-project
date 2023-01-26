@@ -1,40 +1,90 @@
-import * as React from "react";
 import { Input } from "../input/input";
-import { State } from "../../interface";
+import { ModalTechsProps, TechFormValues } from "../../interface";
 import { Button } from "../button/button";
 import { ReactElement } from "react";
-import { SnackBarAlert } from "../snackBarAlert/snackBarAlert";
-import { ModalTechsProps } from "../../interface";
-import { Modal, SnackbarOrigin } from "@mui/material";
+import { Modal } from "@mui/material";
 import { TechForm, TechFormHeader } from "./style";
 
 import CloseIcon from "@mui/icons-material/Close";
-
+import { useForm } from "react-hook-form";
+import { TechSchema } from "../../schema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export const TechModal = ({
   open,
   handleModal,
   type,
   techData,
+  setState,
 }: ModalTechsProps): ReactElement => {
-  const [state, setState] = React.useState<State>({
-    isOpenAlert: false,
-    vertical: "top",
-    horizontal: "right",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TechFormValues>({
+    resolver: yupResolver(TechSchema),
   });
-  const { vertical, horizontal, isOpenAlert } = state;
+  const onSubmit = handleSubmit((data) => {
+    if (type === "register") {
+      setState({
+        isOpenAlert: true,
+        vertical: "top",
+        horizontal: "right",
+        ResponseType: "success",
+      });
 
-  const handleClick = (newState: SnackbarOrigin) => () => {
-    setState({ isOpenAlert: true, ...newState });
-  };
+      // if(axios request == error)
+      // if (response.status !== 201) {
+      //   setState({
+      //     isOpenAlert: true,
+      //     vertical: "top",
+      //     horizontal: "right",
+      //     ResponseType: "success",
+      //   });
+      // } else {
+      //  setState({
+      //   isOpenAlert: true,
+      //   vertical: "top",
+      //   horizontal: "right",
+      //   ResponseType: "error",
+      //   error: {
+      //     status: respose.status,
+      //     message:response.message,
+      //   }
+      // });
+      // }
+    } else {
+      setState({
+        isOpenAlert: true,
+        vertical: "top",
+        horizontal: "right",
+        ResponseType: "success",
+      });
+      // if(axios request == error)
+      // if (response.status !== 201) {
+      //   setState({
+      //     isOpenAlert: true,
+      //     vertical: "top",
+      //     horizontal: "right",
+      //     ResponseType: "success",
+      //   });
+      // } else {
+      //  setState({
+      //   isOpenAlert: true,
+      //   vertical: "top",
+      //   horizontal: "right",
+      //   ResponseType: "error",
+      //   error: {
+      //     status: respose.status,
+      //     message:response.message,
+      //   }
+      // });
+      // }
+    }
+  });
 
-  const handleClose = () => {
-    setState({ ...state, isOpenAlert: false });
-  };
   return (
     <>
-    <SnackBarAlert isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={{message:"s", status:4}} />
-
       <Modal
         open={open}
         onClose={handleModal}
@@ -42,28 +92,62 @@ export const TechModal = ({
         aria-describedby="modal-modal-description"
       >
         {type === "register" ? (
-          <TechForm>
+          <TechForm onSubmit={onSubmit}>
             <TechFormHeader>
               <p>cadastre sua tecnologia</p>
               <CloseIcon
                 onClick={() => handleModal({ typeOfForm: "register" })}
               />
             </TechFormHeader>
-            <Input label="Nome da Tecnologia" type="text" placeholder="Typescript"></Input>
-            <Input label="Status" type="text" placeholder="junior"></Input>
-            <Button type="button" variant="default" variant_hover="default_hover" size="large" onClick={handleClick({vertical: "top", horizontal: "right"})} >
+            <Input
+              {...register("Techname")}
+              label="Nome da Tecnologia"
+              type="text"
+              placeholder="Typescript"
+              errors={errors?.Techname?.message}
+            ></Input>
+            <Input
+              {...register("Techstatus")}
+              label="Status"
+              type="text"
+              placeholder="junior"
+              errors={errors?.Techstatus?.message}
+            ></Input>
+            <Button
+              type="submit"
+              variant="default"
+              variant_hover="default_hover"
+              size="large"
+            >
               {"Cadastrar Tecnologia"}
             </Button>
           </TechForm>
         ) : (
-          <TechForm>
+          <TechForm onSubmit={onSubmit} >
             <TechFormHeader>
               <p>Editar Sua Tecnologia</p>
               <CloseIcon onClick={() => handleModal({ typeOfForm: "edit" })} />
             </TechFormHeader>
-            <Input label="Nome da Tecnologia" type="text" value={techData?.name} ></Input>
-            <Input label="Status" type="text" value={techData?.status} ></Input>
-            <Button type="button" variant="default" variant_hover="default_hover" size="large" >
+            <Input
+              {...register("Techname")}
+              label="Nome da Tecnologia"
+              type="text"
+              placeholder={techData?.name || "" }
+              errors={errors?.Techname?.message}
+            ></Input>
+            <Input
+              {...register("Techstatus")}
+              label="Status"
+              type="text"
+              placeholder={techData?.status || "" }
+              errors={errors?.Techstatus?.message}
+            ></Input>
+            <Button
+              type="submit"
+              variant="default"
+              variant_hover="default_hover"
+              size="large"
+            >
               {"Editar Tecnologia"}
             </Button>
           </TechForm>

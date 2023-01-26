@@ -1,3 +1,5 @@
+import * as React from "react";
+import { State } from "../../interface";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +8,28 @@ import { NavBar } from "../../components/navBar/navBar";
 import { TechModal } from "../../components/techModal/techModal";
 import { Tech } from "../../components/techs/techs";
 import { ModalHandlerProps } from "../../interface";
+import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState<string>("");
   const [techData, setTechData] = useState<any>();
   
-  const state: any = useSelector((state) => state);
+  const userRedux: any = useSelector((state) => state);
   const navigate = useNavigate();
+
+  const [state, setState] = React.useState<State>({
+    isOpenAlert: false,
+    vertical: "top",
+    horizontal: "right",
+    ResponseType: "error",
+    error: {
+      status: 0,
+      message:"error message",
+    }
+  });
+
+  const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
 
   const handleModal = ({ typeOfForm, techData }: ModalHandlerProps) => {
     if (typeOfForm) {
@@ -23,8 +39,12 @@ export const Home = () => {
     setTechData(techData)
   };
 
+  const handleClose = () => {
+    setState({ ...state, isOpenAlert: false });
+  };
+
   useEffect(() => {
-    if (state.user.user === "") {
+    if (userRedux.user.user === "") {
       navigate("/login");
     }
   });
@@ -32,7 +52,8 @@ export const Home = () => {
   return (
     <>
       <NavBar />
-      <TechModal open={isOpen} handleModal={handleModal} type={formType} techData={techData} />
+      <SnackBarAlert ResponseType={ResponseType} isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={error} />
+      <TechModal setState={setState} open={isOpen} handleModal={handleModal} type={formType} techData={techData} />
       <Header />
       <Tech handleModal={handleModal} />
     </>
