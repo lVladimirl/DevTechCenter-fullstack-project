@@ -6,7 +6,7 @@ export const Header = (): ReactElement => {
   return (
     <HeaderBox>
       <div>
-        <h4>Bem vindo {state?.user.user}</h4>
+        <h4>Bem vindo {state?.user.userName}</h4>
         <p>user status user status user status user status</p>
       </div>
     </HeaderBox>

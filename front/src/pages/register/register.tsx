@@ -15,8 +15,8 @@ export const Register = () => {
     ResponseType: "error",
     error: {
       status: 0,
-      message:"error message",
-    }
+      message: "error message",
+    },
   });
   const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
 
@@ -30,20 +30,27 @@ export const Register = () => {
   };
   return (
     <>
-    <SnackBarAlert ResponseType={ResponseType} isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={error} />
+      <SnackBarAlert
+        ResponseType={ResponseType}
+        isOpenAlert={isOpenAlert}
+        vertical={vertical}
+        horizontal={horizontal}
+        handleClose={handleClose}
+        error={error}
+      />
       <FormBox>
-        <FormHeader >
+        <FormHeader>
           <h1>BrandName</h1>
           <Button
             variant="text_button"
             variant_hover="text_button_hover"
             size="small"
-            onClick={(e)=> sendToLogin(e)}
+            onClick={(e) => sendToLogin(e)}
           >
             Voltar
           </Button>
         </FormHeader>
-        <RegisterForm setState={setState}  />
+        <RegisterForm setState={setState} />
       </FormBox>
     </>
   );

@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-    name:"asd",
+    name:"userSlicer",
     initialState:{
-        user:"a",
-        tech:[{id:"asdas", name: "tech1", status:"noob"},{id:"asd", name: "tech2", status:"noasdaob"}],
+        userName:"Pedrinho",
+        tech:[{id:"tech1ID", name: "Typescript", status:"junior"},{id:"tech2ID", name: "Python", status:"junior"}],
         isLogged: false,
     },
     reducers:{

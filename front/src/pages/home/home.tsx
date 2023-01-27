@@ -11,10 +11,10 @@ import { ModalHandlerProps } from "../../interface";
 import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
 
 export const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formType, setFormType] = useState<string>("");
   const [techData, setTechData] = useState<any>();
-  
+
   const userRedux: any = useSelector((state) => state);
   const navigate = useNavigate();
 
@@ -25,8 +25,8 @@ export const Home = () => {
     ResponseType: "error",
     error: {
       status: 0,
-      message:"error message",
-    }
+      message: "error message",
+    },
   });
 
   const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
@@ -36,7 +36,7 @@ export const Home = () => {
       setFormType(typeOfForm);
     }
     setIsOpen(!isOpen);
-    setTechData(techData)
+    setTechData(techData);
   };
 
   const handleClose = () => {
@@ -44,16 +44,30 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    if (userRedux.user.user === "") {
+    if (userRedux.user.userName === "") {
       navigate("/login");
     }
   });
 
+  console.log(userRedux);
   return (
     <>
       <NavBar />
-      <SnackBarAlert ResponseType={ResponseType} isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={error} />
-      <TechModal setState={setState} open={isOpen} handleModal={handleModal} type={formType} techData={techData} />
+      <SnackBarAlert
+        ResponseType={ResponseType}
+        isOpenAlert={isOpenAlert}
+        vertical={vertical}
+        horizontal={horizontal}
+        handleClose={handleClose}
+        error={error}
+      />
+      <TechModal
+        setState={setState}
+        open={isOpen}
+        handleModal={handleModal}
+        type={formType}
+        techData={techData}
+      />
       <Header />
       <Tech handleModal={handleModal} />
     </>
