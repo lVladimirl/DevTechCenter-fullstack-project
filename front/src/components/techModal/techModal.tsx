@@ -30,7 +30,11 @@ export const TechModal = ({
         isOpenAlert: true,
         vertical: "top",
         horizontal: "right",
-        ResponseType: "success",
+        ResponseType: "error",
+        error: {
+          status: 400,
+          message: "error message",
+        },
       });
 
       // if(axios request == error)
