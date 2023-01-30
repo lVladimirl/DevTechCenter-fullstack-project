@@ -25,6 +25,7 @@ export const SnackBarAlert = ({
   ResponseType,
   error
 }: SnackBarProp): ReactElement => {
+  console.log(error)
   return (
     <Snackbar
       anchorOrigin={{ vertical, horizontal }}
