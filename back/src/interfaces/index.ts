@@ -1,4 +1,4 @@
-import { statusType } from "@prisma/client"
+import { statusType, techStatus } from "@prisma/client"
 export interface IUserCreateUpdate {
     name: string
     email: string
@@ -7,7 +7,14 @@ export interface IUserCreateUpdate {
     contact: string
     status: statusType
 }
-// export interface IUserLogin {
-//     email:string
-//     password:string
-// }
+
+export interface ITechnologieCreateUpdate {
+    name: string
+    status: techStatus
+    userId: string
+}
+
+export interface IUserLogin {
+    email:string
+    password:string
+}
