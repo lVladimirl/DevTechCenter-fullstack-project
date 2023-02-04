@@ -11,6 +11,34 @@ datasource db {
 }
 
 model User {
-  id   String @id @default(uuid())
-  name String @db.VarChar(100)
+  id       String     @id @default(uuid())
+  name     String     @db.VarChar(100)
+  email    String     @unique @db.VarChar(100)
+  password String
+  bio      String     @db.VarChar(2000)
+  contact  String     @db.VarChar(20)
+  status   statusType @default(JUNIOR)
+
+  technologies Technologies[] @relation("techPortifolio")
+}
+
+model Technologies {
+  id     String     @id @default(uuid())
+  name   String     @db.VarChar(100)
+  status techStatus @default(INICIANTE)
+
+  user   User   @relation("techPortifolio", fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+enum statusType {
+  JUNIOR
+  PLENO
+  SENIOR
+}
+
+enum techStatus {
+  INICIANTE
+  INTERMEDIARIO
+  AVANCADO
 }

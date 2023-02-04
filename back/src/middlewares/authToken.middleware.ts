@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
-import { AppError } from "../errors/appError"
+import { AppError } from "../errors/AppError"
 
 export const authTokenMiddleware = async (
   req: Request,
@@ -10,7 +10,7 @@ export const authTokenMiddleware = async (
   let token = req.headers.authorization
 
   if (!token) {
-    throw new AppError("Token Invalido", 401)
+    throw new AppError(401,"Token Invalido")
   }
 
   token = token?.split(" ")[1]
@@ -20,7 +20,7 @@ export const authTokenMiddleware = async (
     process.env.SECRET_KEY as string,
     (error: any, decoded: any) => {
       if (error) {
-        throw new AppError("Token inválido", 401)
+        throw new AppError(401,"Token Invalido")
       }
 
       req.user = {
@@ -30,3 +30,4 @@ export const authTokenMiddleware = async (
   )
   next()
 }
+

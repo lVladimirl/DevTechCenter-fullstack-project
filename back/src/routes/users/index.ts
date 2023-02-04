@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { Request, Response } from "express";
-// import { authTokenMiddleware } from "../../middlewares/authToken.middleware";
+import { createLoginController } from "../../controllers/users/loginCreate.controller";
+import userCreateController from "../../controllers/users/userCreate.controller";
 
 const user = Router();
 
 const userRouter = () => {
-  user.get("/",(req: Request, res: Response) => {
-    res.status(200).json({
-      message: "user Route",
-    });
-  });
+  user.get("/",);
+  user.post("/register", userCreateController)
+  user.post("/login", createLoginController)
 
   return user;
 };
