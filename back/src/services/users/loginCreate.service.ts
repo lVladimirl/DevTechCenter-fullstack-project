@@ -11,7 +11,6 @@ export const loginCreateService = async ({ email, password }: IUserLogin) => {
     throw new AppError(400, "User is not find");
   } else {
     const checkPassword = await compare(password, user.password);
-    console.log(checkPassword);
     if (checkPassword) {
       const token = jwt.sign(
         {
