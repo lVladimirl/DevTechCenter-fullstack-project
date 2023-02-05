@@ -4,35 +4,39 @@ import { AppError } from "../../errors/AppError";
 import { hash } from "bcrypt";
 const userCreateService = async (userData: IUserCreateUpdate) => {
   const { name, email, password, bio, contact, status } = userData;
-  const hashedPassword = await hash(password, 10);
-  const user = await prisma.user.create({
-    data: {
-      name: name,
-      email: email,
-      password: hashedPassword,
-      bio: bio,
-      contact: contact,
-      status: status,
-    },
-    select: {
+
+  const checkUserExistence = await prisma.user.findFirst({
+    where: { email: email },
+  });
+
+  if (checkUserExistence) {
+    throw new AppError(401, "email alredy registered");
+  } else {
+    const hashedPassword = await hash(password, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        name: name,
+        email: email,
+        password: hashedPassword,
+        bio: bio,
+        contact: contact,
+        status: status,
+      },
+      select: {
         name: true,
         email: true,
-        bio:true,
-        technologies:{
-          select:{
+        bio: true,
+        technologies: {
+          select: {
             name: true,
-            status: true
-          }
-        }
-    },
-  });
-  console.log(user)
+            status: true,
+          },
+        },
+      },
+    });
 
-  if(user){
-    return user
-  }else {
-    throw new AppError(400, "algo deu erado");
+    return user;
   }
-  
 };
 export default userCreateService;
