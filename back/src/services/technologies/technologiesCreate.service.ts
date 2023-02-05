@@ -12,7 +12,19 @@ const technologiesCreateService = async ({
       id: userId,
     },
   });
-  if (findUser) {
+  const techAlredyExist = await prisma.technologies.findFirst({where:{
+    name:name,
+    user:{
+      id:userId
+    }
+  }})
+
+  if (!findUser) {
+    throw new AppError(404, "user not find");
+  } else if(techAlredyExist){
+    throw new AppError(400, "this technology is alredy in your repertoire");
+  }
+  else {
     const technology = await prisma.technologies.create({
       data: {
         name: name,
@@ -36,8 +48,6 @@ const technologiesCreateService = async ({
       },
     });
     return technology
-  } else {
-    throw new AppError(404, "user not find");
   }
 };
 export default technologiesCreateService;
