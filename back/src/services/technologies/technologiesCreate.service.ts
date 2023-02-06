@@ -50,6 +50,7 @@ const technologiesCreateService = async ({
       },
     });
     return technology;
+
   }
 };
 export default technologiesCreateService;

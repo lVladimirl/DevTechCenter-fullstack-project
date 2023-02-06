@@ -10,7 +10,8 @@ export const authTokenMiddleware = async (
   let token = req.headers.authorization
 
   if (!token) {
-    throw new AppError(401,"Token Invalido")
+    return res.status(404).json({"message":"Token não encontrado"})
+    // throw new AppError(401,"Token Invalido")
   }
 
   token = token?.split(" ")[1]
@@ -20,7 +21,8 @@ export const authTokenMiddleware = async (
     process.env.SECRET_KEY as string,
     (error: any, decoded: any) => {
       if (error) {
-        throw new AppError(401,"Token Invalido")
+        return res.status(401).json({"message":"credenciais invalidas"})
+        // throw new AppError(401,"credentiais invalidas")
       }
 
       req.user = {
