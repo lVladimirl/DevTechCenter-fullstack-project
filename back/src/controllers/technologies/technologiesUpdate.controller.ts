@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AppError } from "../../errors/AppError";
-import { ITechnologieCreate } from "../../interfaces";
-import technologiesCreateService from "../../services/technologies/technologiesCreate.service";
+import { ITechnologieUpdate } from "../../interfaces";
+import technologiesUpdateService from "../../services/technologies/technologiesUpdate.service";
 
 declare global {
   namespace Express {
@@ -12,11 +12,12 @@ declare global {
     }
   }
 }
-const technologiesCreateController = async (req: Request, res: Response) => {
+const technologiesUpdateController = async (req: Request, res: Response) => {
   try {
-    const { name, status }: ITechnologieCreate = req.body;
+    const { techId } = req.params;
     const userId:string = req.user.id;
-    const technology = await technologiesCreateService({ name, status, userId });
+    const { name, status }: ITechnologieUpdate = req.body;
+    const technology = await technologiesUpdateService({ name, status, userId, techId });
 
     return res.json({ technology });
   } catch (error) {
@@ -28,4 +29,4 @@ const technologiesCreateController = async (req: Request, res: Response) => {
   }
 };
 
-export default technologiesCreateController;
+export default technologiesUpdateController;

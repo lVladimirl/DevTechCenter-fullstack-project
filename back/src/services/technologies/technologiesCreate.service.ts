@@ -1,4 +1,4 @@
-import { ITechnologieCreateUpdate } from "../../interfaces";
+import { ITechnologieCreate } from "../../interfaces";
 import prisma from "../../prisma";
 import { AppError } from "../../errors/AppError";
 
@@ -6,13 +6,27 @@ const technologiesCreateService = async ({
   name,
   status,
   userId,
-}: ITechnologieCreateUpdate) => {
+}: ITechnologieCreate) => {
   const findUser = await prisma.user.findFirst({
     where: {
       id: userId,
     },
   });
-  if (findUser) {
+  const techAlredyExists = await prisma.technologies.findFirst({
+    where: {
+      name: name,
+      userId: userId,
+    },
+  });
+
+  if (!findUser) {
+    throw new AppError(404, "user not find");
+  } else if (techAlredyExists) {
+    throw new AppError(
+      401,
+      "this tech alredy is registered in your repertoire,"
+    );
+  } else {
     const technology = await prisma.technologies.create({
       data: {
         name: name,
@@ -24,7 +38,7 @@ const technologiesCreateService = async ({
         },
       },
       select: {
-        id:true,
+        id: true,
         name: true,
         status: true,
         user: {
@@ -35,9 +49,7 @@ const technologiesCreateService = async ({
         },
       },
     });
-    return technology
-  } else {
-    throw new AppError(404, "user not find");
+    return technology;
   }
 };
 export default technologiesCreateService;

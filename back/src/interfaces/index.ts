@@ -8,10 +8,17 @@ export interface IUserCreateUpdate {
     status: statusType
 }
 
-export interface ITechnologieCreateUpdate {
+export interface ITechnologieCreate {
     name: string
     status: techStatus
     userId: string
+}
+
+export interface ITechnologieUpdate {
+    name?: string
+    status?: techStatus
+    userId?: string
+    techId?: string
 }
 
 export interface IUserLogin {
