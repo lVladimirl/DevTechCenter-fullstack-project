@@ -9,7 +9,7 @@ export const createLoginController = async (req: Request, res: Response) => {
   try {
     const token = await loginCreateService(userData);
 
-    return res.json({ token });
+    return res.status(200).json({token});
   } catch (error) {
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({
