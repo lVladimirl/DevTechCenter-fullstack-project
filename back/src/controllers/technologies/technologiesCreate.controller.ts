@@ -18,7 +18,7 @@ const technologiesCreateController = async (req: Request, res: Response) => {
     const userId:string = req.user.id;
     const technology = await technologiesCreateService({ name, status, userId });
 
-    return res.json({ technology });
+    return res.status(201).json(technology);
   } catch (error) {
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({
