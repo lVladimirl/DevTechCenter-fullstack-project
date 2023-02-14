@@ -19,7 +19,7 @@ const technologiesUpdateController = async (req: Request, res: Response) => {
     const { name, status }: ITechnologieUpdate = req.body;
     const technology = await technologiesUpdateService({ name, status, userId, techId });
 
-    return res.json({ technology });
+    return res.status(200).json(technology);
   } catch (error) {
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({
