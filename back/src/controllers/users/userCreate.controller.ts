@@ -9,7 +9,7 @@ const userCreateController = async (req: Request, res: Response) => {
 
     const user = await userCreateService(userData);
 
-    return res.json({ user });
+    return res.status(201).json(user);
   } catch (error) {
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({
