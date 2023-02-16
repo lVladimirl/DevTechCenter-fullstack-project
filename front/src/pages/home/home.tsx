@@ -1,7 +1,7 @@
 import * as React from "react";
 import { State } from "../../interface";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/header/header";
 import { NavBar } from "../../components/navBar/navBar";
@@ -9,12 +9,15 @@ import { TechModal } from "../../components/techModal/techModal";
 import { Tech } from "../../components/techs/techs";
 import { ModalHandlerProps } from "../../interface";
 import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
+import { api } from "../../utils/api";
+import { login } from "../../store/userSlice";
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formType, setFormType] = useState<string>("");
   const [techData, setTechData] = useState<any>();
 
+  const dispatch = useDispatch();
   const userRedux: any = useSelector((state) => state);
   const navigate = useNavigate();
 
@@ -43,13 +46,23 @@ export const Home = () => {
     setState({ ...state, isOpenAlert: false });
   };
 
+  const fetchData = async () => {
+    const response = await api.get("users/").catch((error) => error);
+    if (response) {
+      dispatch(login(response.data.profile));
+      return response.data.profile;
+    }
+  };
+  // fetchData()
   useEffect(() => {
-    if (userRedux.user.userName === "") {
-      navigate("/login");
+    if (userRedux.user.name === "") {
+      const autoLogin = fetchData();
+      if (!autoLogin) {
+        navigate("/login");
+      }
     }
   });
 
-  console.log(userRedux);
   return (
     <>
       <NavBar />
