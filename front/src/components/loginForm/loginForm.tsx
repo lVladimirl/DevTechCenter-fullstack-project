@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { LoginFormValues } from "../../interface";
 import { LoginSchema } from "../../schema";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../utils/api";
 
 export const LoginForm = ({ setState }: any) => {
   const navigate = useNavigate();
@@ -15,27 +16,33 @@ export const LoginForm = ({ setState }: any) => {
   } = useForm<LoginFormValues>({
     resolver: yupResolver(LoginSchema),
   });
-  const onSubmit = handleSubmit((data) => {
-    // if(axios request == error)
-    // if (response.status !== 201) {
-    //   setState({
-    //     isOpenAlert: true,
-    //     vertical: "top",
-    //     horizontal: "right",
-    //     ResponseType: "error",
-    //   });
-    // } else {
-    //  setState({
-    //   isOpenAlert: true,
-    //   vertical: "top",
-    //   horizontal: "right",
-    //   ResponseType: "error",
-    //   error: {
-    //     status: respose.status,
-    //     message:response.message,
-    //   }
-    // });
-    // }
+  const onSubmit = handleSubmit( async (data) => {
+    const response = await api
+      .post("users/login", data)
+      .catch((error) => error);
+    if (response.status === 200) {
+      setState({
+        isOpenAlert: true,
+        vertical: "top",
+        horizontal: "right",
+        ResponseType: "sucess",
+      });
+      sessionStorage.setItem("@DTC-token", response.data.token)
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    } else {
+      setState({
+        isOpenAlert: true,
+        vertical: "top",
+        horizontal: "right",
+        ResponseType: "error",
+        error: {
+          status: response.response.status,
+          message: response.response.data.message,
+        },
+      });
+    }
   });
 
   const sendToRegister = (e: React.FormEvent<HTMLButtonElement>) => {

@@ -1,45 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
 export const slice = createSlice({
-    name: "userSlicer",
-    initialState: {
-      userName: "Pedrinho",
-      tech:[],
-      isLogged: false,
+  name: "userSlicer",
+  initialState: {
+    id:"",
+    name:"",
+    bio:"",
+    status:"",
+    isLogged: false,
+  },
+  reducers: {
+    login(state, { payload }) {
+      return { ...state, isLogged: true, id: payload.id, name: payload.name, status:payload.status, bio:payload.bio };
     },
-    reducers: {
-      changeUser(state, { payload }) {
-        return { ...state, isLogged: true, user: payload };
-      },
-      logout(state) {
-        return { ...state, isLogged: false, user: "" };
-      },
+    logout(state) {
+      return { ...state, isLogged: false, id:"" , name:"" ,status:"", bio:"" };
     },
-  });
-  export const { changeUser, logout } = slice.actions;
-  
-  export default slice.reducer;
+  },
+});
+export const { login, logout } = slice.actions;
+
+export default slice.reducer;
 
 
-// export const slice = createSlice({
-//   name: "userSlicer",
-//   initialState: {
-//     userName: "Pedrinho",
-//     tech: [
-//       { id: "tech1ID", name: "Typescript", status: "junior" },
-//       { id: "tech2ID", name: "Python", status: "junior" },
-//     ],
-//     isLogged: false,
-//   },
-//   reducers: {
-//     changeUser(state, { payload }) {
-//       return { ...state, isLogged: true, user: payload };
-//     },
-//     logout(state) {
-//       return { ...state, isLogged: false, user: "" };
-//     },
-//   },
-// });
-// export const { changeUser, logout } = slice.actions;
-
-// export default slice.reducer;
