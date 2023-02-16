@@ -1,11 +1,14 @@
 import { Input } from "../../components/input/input";
 import { Button } from "../../components/button/button";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from "../../utils/api";
 import { useForm } from "react-hook-form";
-import { RegisterFormValues } from "../../interface";
+import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SignupSchema } from "../../schema";
+import { RegisterFormValues } from "../../interface";
 
 export const RegisterForm = ({ setState }: any) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -13,27 +16,43 @@ export const RegisterForm = ({ setState }: any) => {
   } = useForm<RegisterFormValues>({
     resolver: yupResolver(SignupSchema),
   });
-  const onSubmit = handleSubmit((data) => {
-    // if(axios request == error)
-    // if (response.status !== 201) {
-    //   setState({
-    //     isOpenAlert: true,
-    //     vertical: "top",
-    //     horizontal: "right",
-    //     ResponseType: "error",
-    //   });
-    // } else {
-    //  setState({
-    //   isOpenAlert: true,
-    //   vertical: "top",
-    //   horizontal: "right",
-    //   ResponseType: "error",
-    //   error: {
-    //     status: respose.status,
-    //     message:response.message,
-    //   }
-    // });
-    // }
+
+  const onSubmit = handleSubmit(async (data) => {
+    if (data.password === data.confirmPassword) {
+      const userData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        bio: data.bio,
+        contact: data.contact,
+        status: data.status,
+      };
+      const response = await api
+        .post("users/register", userData)
+        .catch((error) => error);
+      if (response.status === 201) {
+        setState({
+          isOpenAlert: true,
+          vertical: "top",
+          horizontal: "right",
+          ResponseType: "sucess",
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else {
+        setState({
+          isOpenAlert: true,
+          vertical: "top",
+          horizontal: "right",
+          ResponseType: "error",
+          error: {
+            status: response.response.status,
+            message: response.response.data.message,
+          },
+        });
+      }
+    }
   });
 
   return (
