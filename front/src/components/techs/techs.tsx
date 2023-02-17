@@ -8,7 +8,7 @@ import { TechHeaderModal } from "../../interface";
 
 export const Tech = ({ handleModal }: TechHeaderModal): ReactElement => {
   const state: any = useSelector((state) => state);
-  const techs = state.user.tech;
+  const techs = state.tech.tech;
   return (
     <>
       <TechHeader>

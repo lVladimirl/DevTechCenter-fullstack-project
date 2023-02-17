@@ -17,22 +17,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export const SnackBarAlert = ({
-  isOpenAlert,
-  vertical,
-  horizontal,
-  handleClose,
-  ResponseType,
-  error,
-  sucess
-}: SnackBarProp): ReactElement => {
+export const SnackBarAlert = ({ isOpenAlert, vertical, horizontal, handleClose, ResponseType, error, sucess}: SnackBarProp): ReactElement => {
   return (
-    <Snackbar
-      anchorOrigin={{ vertical, horizontal }}
-      open={isOpenAlert}
-      onClose={handleClose}
-      message="I love snacks"
-      key={vertical + horizontal}
+    <Snackbar anchorOrigin={{ vertical, horizontal }} open={isOpenAlert} onClose={handleClose} message="I love snacks" key={vertical + horizontal}
     >
       {ResponseType === "error" ? (
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>

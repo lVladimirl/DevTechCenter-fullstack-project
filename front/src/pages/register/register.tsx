@@ -8,19 +8,7 @@ import { RegisterForm } from "../../components/registerForm/registerForm";
 export const Register = () => {
   const navigate = useNavigate();
 
-   const [state, setState] = React.useState<State>({
-    isOpenAlert: false,
-    vertical: "top",
-    horizontal: "right",
-    ResponseType: "error",
-    error: {
-      status: 0,
-      message:"error message",
-    },
-    sucess:{
-      message:"sucess message"
-    }
-  });
+  const [state, setState] = React.useState<State>({isOpenAlert: false,vertical: "top",horizontal: "right",ResponseType: "error",error: {status: 0,message:"error message"}, sucess:{message:"sucess message"}});
   const { vertical, horizontal, isOpenAlert, ResponseType, error, sucess } = state;
 
   const handleClose = () => {
@@ -33,24 +21,12 @@ export const Register = () => {
   };
   return (
     <>
-      <SnackBarAlert
-        ResponseType={ResponseType}
-        isOpenAlert={isOpenAlert}
-        vertical={vertical}
-        horizontal={horizontal}
-        handleClose={handleClose}
-        error={error}
-        sucess={sucess}
+      <SnackBarAlert ResponseType={ResponseType} isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={error} sucess={sucess}
       />
       <FormBox>
         <FormHeader>
           <h1>BrandName</h1>
-          <Button
-            variant="text_button"
-            variant_hover="text_button_hover"
-            size="small"
-            onClick={(e) => sendToLogin(e)}
-          >
+          <Button variant="text_button" variant_hover="text_button_hover" size="small" onClick={(e) => sendToLogin(e)} >
             Voltar
           </Button>
         </FormHeader>

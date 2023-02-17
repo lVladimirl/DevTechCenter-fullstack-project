@@ -11,6 +11,7 @@ import { ModalHandlerProps } from "../../interface";
 import { SnackBarAlert } from "../../components/snackBarAlert/snackBarAlert";
 import { api } from "../../utils/api";
 import { login } from "../../store/userSlice";
+import { getTech } from "../../store/techSlice";
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,19 +22,7 @@ export const Home = () => {
   const userRedux: any = useSelector((state) => state);
   const navigate = useNavigate();
 
-   const [state, setState] = React.useState<State>({
-    isOpenAlert: false,
-    vertical: "top",
-    horizontal: "right",
-    ResponseType: "error",
-    error: {
-      status: 0,
-      message:"error message",
-    },
-    sucess:{
-      message:"sucess message"
-    }
-  });
+  const [state, setState] = React.useState<State>({isOpenAlert: false,vertical: "top",horizontal: "right",ResponseType: "error",error: {status: 0,message:"error message"}, sucess:{message:"sucess message"}});
   const { vertical, horizontal, isOpenAlert, ResponseType, error, sucess } = state;
 
   const handleModal = ({ typeOfForm, techData }: ModalHandlerProps) => {
@@ -55,35 +44,34 @@ export const Home = () => {
       return response.data.profile;
     }
   };
-  // fetchData()
+
+  const fetchTech = async () => {
+    const response = await api.get("technologies/").catch((error)=>error);
+    if(response ){
+      dispatch(getTech(response.data));
+      return response.data
+    }
+  }
+
   useEffect(() => {
-    if (userRedux.user.name === "") {
+    const token = sessionStorage.getItem("@DTC-token")
+
+    if(!token){
+      navigate("/login")
+    }
+    if( token && !userRedux.user.name ){
       const autoLogin = fetchData();
-      if (!autoLogin) {
-        navigate("/login");
-      }
+    } 
+    if ( token && !userRedux.tech.tech[0]){
+      const getTech = fetchTech();
     }
   });
 
   return (
     <>
       <NavBar />
-      <SnackBarAlert
-        ResponseType={ResponseType}
-        isOpenAlert={isOpenAlert}
-        vertical={vertical}
-        horizontal={horizontal}
-        handleClose={handleClose}
-        error={error}
-        sucess={sucess}
-      />
-      <TechModal
-        setState={setState}
-        open={isOpen}
-        handleModal={handleModal}
-        type={formType}
-        techData={techData}
-      />
+      <SnackBarAlert ResponseType={ResponseType} isOpenAlert={isOpenAlert} vertical={vertical} horizontal={horizontal} handleClose={handleClose} error={error} sucess={sucess} />
+      <TechModal setState={setState} open={isOpen} handleModal={handleModal} type={formType} techData={techData} fetchTech={fetchTech} />
       <Header />
       <Tech handleModal={handleModal} />
     </>

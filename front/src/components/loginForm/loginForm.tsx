@@ -9,6 +9,7 @@ import { api } from "../../utils/api";
 
 export const LoginForm = ({ setState }: any) => {
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,35 +17,22 @@ export const LoginForm = ({ setState }: any) => {
   } = useForm<LoginFormValues>({
     resolver: yupResolver(LoginSchema),
   });
+
   const onSubmit = handleSubmit( async (data) => {
     const response = await api
       .post("users/login", data)
       .catch((error) => error);
     if (response.status === 200) {
-      setState({
-        isOpenAlert: true,
-        vertical: "top",
-        horizontal: "right",
-        ResponseType: "sucess",
-        sucess:{
-          message:"Bem Vindo"
-        }
-      });
+      setState({isOpenAlert: true, vertical: "top", horizontal: "right", ResponseType: "sucess", sucess:{message:"Bem Vindo"}});
+
       sessionStorage.setItem("@DTC-token", response.data.token)
+      
       setTimeout(() => {
         navigate("/");
       }, 3000);
+    
     } else {
-      setState({
-        isOpenAlert: true,
-        vertical: "top",
-        horizontal: "right",
-        ResponseType: "error",
-        error: {
-          status: response.response.status,
-          message: response.response.data.message,
-        },
-      });
+      setState({ isOpenAlert: true, vertical: "top", horizontal: "right", ResponseType: "error", error: { status: response.response.status, message: response.response.data.message} });
     }
   });
 
@@ -56,38 +44,18 @@ export const LoginForm = ({ setState }: any) => {
   return (
     <form onSubmit={onSubmit}>
       <h2>Registro</h2>
-      <Input
-        label="email"
-        type="text"
-        placeholder="pedrinho@gmail"
-        errors={errors?.email?.message}
+      <Input label="email" type="text" placeholder="pedrinho@gmail" errors={errors?.email?.message}
         {...register("email")}
       ></Input>
-      <Input
-        label="senha"
-        type="text"
-        placeholder="pedrinho123"
-        errors={errors?.password?.message}
+      <Input label="senha" type="text" placeholder="pedrinho123" errors={errors?.password?.message}
         {...register("password")}
       ></Input>
-      <Button
-        type="submit"
-        variant="default"
-        variant_hover="default_hover"
-        size="large"
-      >
+      <Button type="submit" variant="default" variant_hover="default_hover" size="large">
         {"Login"}
       </Button>
       <span>Não possui conta?</span>
-      <Button
-        type="button"
-        variant="disable"
-        variant_hover="disable_hover"
-        size="large"
-        onClick={(e) => sendToRegister(e)}
-      >
-        {" "}
-        Cadastre-se
+      <Button type="button" variant="disable" variant_hover="disable_hover" size="large" onClick={(e) => sendToRegister(e)}>
+        {"Cadastre-se"}
       </Button>
     </form>
   );

@@ -34,6 +34,7 @@ export interface ModalTechsProps {
     status: string;
   }
   setState: any;
+  fetchTech: any;
 
 }
 
