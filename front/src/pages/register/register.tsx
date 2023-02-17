@@ -8,17 +8,20 @@ import { RegisterForm } from "../../components/registerForm/registerForm";
 export const Register = () => {
   const navigate = useNavigate();
 
-  const [state, setState] = React.useState<State>({
+   const [state, setState] = React.useState<State>({
     isOpenAlert: false,
     vertical: "top",
     horizontal: "right",
     ResponseType: "error",
     error: {
       status: 0,
-      message: "error message",
+      message:"error message",
     },
+    sucess:{
+      message:"sucess message"
+    }
   });
-  const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
+  const { vertical, horizontal, isOpenAlert, ResponseType, error, sucess } = state;
 
   const handleClose = () => {
     setState({ ...state, isOpenAlert: false });
@@ -37,6 +40,7 @@ export const Register = () => {
         horizontal={horizontal}
         handleClose={handleClose}
         error={error}
+        sucess={sucess}
       />
       <FormBox>
         <FormHeader>

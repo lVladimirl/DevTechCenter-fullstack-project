@@ -36,6 +36,9 @@ export const RegisterForm = ({ setState }: any) => {
           vertical: "top",
           horizontal: "right",
           ResponseType: "sucess",
+          sucess:{
+            message:"Cadastro Realizado"
+          }
         });
         setTimeout(() => {
           navigate("/login");
