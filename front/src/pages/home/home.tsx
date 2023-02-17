@@ -21,18 +21,20 @@ export const Home = () => {
   const userRedux: any = useSelector((state) => state);
   const navigate = useNavigate();
 
-  const [state, setState] = React.useState<State>({
+   const [state, setState] = React.useState<State>({
     isOpenAlert: false,
     vertical: "top",
     horizontal: "right",
     ResponseType: "error",
     error: {
       status: 0,
-      message: "error message",
+      message:"error message",
     },
+    sucess:{
+      message:"sucess message"
+    }
   });
-
-  const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
+  const { vertical, horizontal, isOpenAlert, ResponseType, error, sucess } = state;
 
   const handleModal = ({ typeOfForm, techData }: ModalHandlerProps) => {
     if (typeOfForm) {
@@ -73,6 +75,7 @@ export const Home = () => {
         horizontal={horizontal}
         handleClose={handleClose}
         error={error}
+        sucess={sucess}
       />
       <TechModal
         setState={setState}

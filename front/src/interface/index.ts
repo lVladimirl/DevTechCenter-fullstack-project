@@ -48,6 +48,9 @@ export interface State extends SnackbarOrigin {
     status?: number;
     message?: string;
   };
+  sucess:{
+    message?: string;
+  }
 }
 
 export interface RegisterFormValues {

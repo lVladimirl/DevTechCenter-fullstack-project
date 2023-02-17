@@ -26,6 +26,9 @@ export const LoginForm = ({ setState }: any) => {
         vertical: "top",
         horizontal: "right",
         ResponseType: "sucess",
+        sucess:{
+          message:"Bem Vindo"
+        }
       });
       sessionStorage.setItem("@DTC-token", response.data.token)
       setTimeout(() => {

@@ -23,7 +23,8 @@ export const SnackBarAlert = ({
   horizontal,
   handleClose,
   ResponseType,
-  error
+  error,
+  sucess
 }: SnackBarProp): ReactElement => {
   return (
     <Snackbar
@@ -39,7 +40,7 @@ export const SnackBarAlert = ({
         </Alert>
       ) : (
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Sucess Message
+          {sucess?.message}
         </Alert>
       )}
     </Snackbar>

@@ -13,9 +13,12 @@ export const Login = () => {
     error: {
       status: 0,
       message:"error message",
+    },
+    sucess:{
+      message:"sucess message"
     }
   });
-  const { vertical, horizontal, isOpenAlert, ResponseType, error } = state;
+  const { vertical, horizontal, isOpenAlert, ResponseType, error, sucess } = state;
 
   const handleClose = () => {
     setState({ ...state, isOpenAlert: false });
@@ -30,6 +33,7 @@ export const Login = () => {
         horizontal={horizontal}
         handleClose={handleClose}
         error={error}
+        sucess={sucess}
       />
       <FormBox>
         <h1>BrandName</h1>
