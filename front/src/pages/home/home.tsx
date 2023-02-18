@@ -37,16 +37,16 @@ export const Home = () => {
     setState({ ...state, isOpenAlert: false });
   };
 
-  const fetchData = async () => {
-    const response = await api.get("users/").catch((error) => error);
+  const fetchData = async (token:string) => {
+    const response = await api.get("users/", {headers: { Authorization: `Bearer ${token}` }}).catch((error) => error);
     if (response) {
       dispatch(login(response.data.profile));
       return response.data.profile;
     }
   };
 
-  const fetchTech = async () => {
-    const response = await api.get("technologies/").catch((error)=>error);
+  const fetchTech = async (token:string) => {
+    const response = await api.get("technologies/", {headers: { Authorization: `Bearer ${token}` }}).catch((error)=>error);
     if(response ){
       dispatch(getTech(response.data));
       return response.data
@@ -55,15 +55,12 @@ export const Home = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem("@DTC-token")
-
     if(!token){
       navigate("/login")
-    }
-    if( token && !userRedux.user.name ){
-      const autoLogin = fetchData();
-    } 
-    if ( token && !userRedux.tech.tech[0]){
-      const getTech = fetchTech();
+    }else if(token && !userRedux.user.name){
+      const autoLogin = fetchData(token);
+    }else if(token && userRedux.user.name &&  !userRedux.tech.tech[0]){
+      const getTech = fetchTech(token);
     }
   });
 
