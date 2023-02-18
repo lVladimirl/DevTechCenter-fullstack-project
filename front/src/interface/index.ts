@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, SelectHTMLAttributes } from "react";
 import { SnackbarOrigin } from "@mui/material";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,6 +7,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   errors?: string;
   value?: string |number;
+}
+
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  type: string;
+  placeholder?: string;
+  errors?: string;
+  value?: string ;
 }
 
 export interface UserTechsProps {

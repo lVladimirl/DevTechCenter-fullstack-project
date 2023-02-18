@@ -23,7 +23,7 @@ export const Tech = ({ handleModal }: TechHeaderModal): ReactElement => {
               return (
                 <Card key={elem.id} onClick={() =>handleModal({ typeOfForm: "edit", techData: { id: elem.id, name: elem.name, status: elem.status},})}>
                   <h4 key={`${index}h4`}>{elem.name}</h4>
-                  <p key={`${index}p`}>{elem.status}</p>
+                  <p key={`${index}p`}>{elem.status==="AVANCADO" && ("AVANÇADO")} {elem.status==="INTERMEDIARIO" && ("INTERMEDIÁRIO")} {elem.status==="INICIANTE" && ("INICIANTE")} </p>
                 </Card>
               );
             })

@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { TechSchema } from "../../schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../utils/api";
+import { Select } from "../Select/Select";
 
 export const TechModal = ({open,handleModal,type,techData,setState,fetchTech}: ModalTechsProps): ReactElement => {
   const {
@@ -68,7 +69,7 @@ export const TechModal = ({open,handleModal,type,techData,setState,fetchTech}: M
               <CloseIcon onClick={() => handleModal({ typeOfForm: "register" })} />
             </TechFormHeader>
             <Input {...register("Techname")} label="Nome da Tecnologia" type="text" placeholder="Typescript" errors={errors?.Techname?.message} ></Input>
-            <Input {...register("Techstatus")} label="Status" type="text" placeholder="junior" errors={errors?.Techstatus?.message} ></Input>
+            <Select {...register("Techstatus")} type="tech" label="Status" placeholder={techData?.status || ""} errors={errors?.Techstatus?.message} />
             <Button type="submit" variant="default" variant_hover="default_hover" size="large" >
               {"Cadastrar Tecnologia"}
             </Button>
@@ -80,7 +81,7 @@ export const TechModal = ({open,handleModal,type,techData,setState,fetchTech}: M
               <CloseIcon onClick={() => handleModal({ typeOfForm: "edit" })} />
             </TechFormHeader>
             <Input {...register("Techname")} label="Nome da Tecnologia" type="text" placeholder={techData?.name || ""} errors={errors?.Techname?.message} ></Input>
-            <Input {...register("Techstatus")} label="Status" type="text" placeholder={techData?.status || ""} errors={errors?.Techstatus?.message} ></Input>
+            <Select {...register("Techstatus")} type="tech" label="Status" placeholder={techData?.status || ""} errors={errors?.Techstatus?.message} />
             <TechEditDeleteSection>
             <Button type="submit" variant="default" variant_hover="default_hover" size="large" >
               {"Salvar Aterações"}
