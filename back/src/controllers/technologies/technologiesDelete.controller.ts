@@ -19,7 +19,7 @@ const technologiesDeleteController = async (req: Request, res: Response) => {
     const userId:string = req.user.id;
     const technology = await technologiesDeleteService({techId, userId});
 
-    return res.status(204).json();
+    return res.status(204).json([]);
   } catch (error) {
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({

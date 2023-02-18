@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignupSchema } from "../../schema";
 import { RegisterFormValues } from "../../interface";
+import { Select } from "../Select/Select";
 
 export const RegisterForm = ({ setState }: any) => {
   const navigate = useNavigate();
@@ -46,7 +47,8 @@ export const RegisterForm = ({ setState }: any) => {
       <Input label="confirmar senha" type="text" placeholder="pedrinho123" errors={errors?.confirmPassword?.message} {...register("confirmPassword")}></Input>
       <Input label="bio" type="text" placeholder="javascript is good, java is evil." errors={errors?.bio?.message} {...register("bio")}></Input>
       <Input label="contato" type="text" placeholder="12345678" errors={errors?.contact?.message} {...register("contact")}></Input>
-      <Input label="status" type="text" placeholder="juior dev, pleno, senior" errors={errors?.status?.message} {...register("status")}></Input>
+      <Select label="status" type="user" placeholder="juior dev, pleno, senior" errors={errors?.status?.message} {...register("status")} />
+      {/* <Input label="status" type="text" placeholder="juior dev, pleno, senior" errors={errors?.status?.message} {...register("status")}></Input> */}
       <Button type="submit" variant="default" variant_hover="default_hover" size="large">
         {"Cadastrar"}
       </Button>

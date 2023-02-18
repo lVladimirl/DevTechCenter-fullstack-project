@@ -35,6 +35,7 @@ export const FormBox = styled.div`
     }
 
     input,
+    select,
     label,
     small,
     button {
@@ -81,6 +82,7 @@ export const FormBox = styled.div`
   }
 
   input,
+  select,
   label,
   small,
   button {

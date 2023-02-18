@@ -13,6 +13,7 @@ export const TechForm = styled.form`
     background-color: var(--grey-3);
 
     input,
+    select,
     label,
     small {
       width: 90%;
@@ -34,6 +35,7 @@ export const TechForm = styled.form`
   background-color: var(--grey-3);
 
   input,
+  select,
   label,
   small {
     width: 90%;
