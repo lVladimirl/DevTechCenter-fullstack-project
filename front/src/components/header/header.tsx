@@ -6,8 +6,8 @@ export const Header = (): ReactElement => {
   return (
     <HeaderBox>
       <div>
-        <h4>Bem vindo {state?.user.user}</h4>
-        <p>user status user status user status user status</p>
+        <h4>Bem vindo {state?.user.name}</h4>
+        <p>{state?.user.status}</p>
       </div>
     </HeaderBox>
   );

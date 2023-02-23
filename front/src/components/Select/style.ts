@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputStyled = styled.div`
+export const SelectStyled = styled.div`
 
     display: flex;
     flex-direction: column;
@@ -9,14 +9,13 @@ export const InputStyled = styled.div`
         
         font: var(--input-label)
         font-size: 0.875rem;
-        margin: 8px 0px;
         color: var(--grey-0);
 
     }
 
-    input {
+    select {
         
-        width: 486px;
+        width: 90%;
         height: 48px;
         padding: 8px 10px;
         
@@ -27,7 +26,7 @@ export const InputStyled = styled.div`
 
     }
 
-    input::focus {
+    select::focus {
 
         border: 1.5px solid var(--grey-0);      
     
