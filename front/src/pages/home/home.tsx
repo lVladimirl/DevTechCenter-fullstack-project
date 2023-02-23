@@ -41,7 +41,7 @@ export const Home = () => {
     const response = await api.get("users/", {headers: { Authorization: `Bearer ${token}` }}).catch((error) => error);
     if (response) {
       dispatch(login(response.data.profile));
-      return response.data.profile;
+      return response;
     }
   };
 
@@ -49,7 +49,7 @@ export const Home = () => {
     const response = await api.get("technologies/", {headers: { Authorization: `Bearer ${token}` }}).catch((error)=>error);
     if(response ){
       dispatch(getTech(response.data));
-      return response.data
+      return response
     }
   }
 
@@ -58,9 +58,8 @@ export const Home = () => {
     if(!token){
       navigate("/login")
     }else if(token && !userRedux.user.name){
-      const autoLogin = fetchData(token);
-    }else if(token && userRedux.user.name &&  !userRedux.tech.tech[0]){
-      const getTech = fetchTech(token);
+      fetchData(token);
+      fetchTech(token);
     }
   });
 
