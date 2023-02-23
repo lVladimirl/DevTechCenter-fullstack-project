@@ -16,7 +16,7 @@ export const slice = createSlice({
       return { ...state, isLogged: true, id: payload.id, name: payload.name, status:payload.status, bio:payload.bio };
     },
     logout(state) {
-      return { ...state, isLogged: false, id:"" , name:"" ,status:"", bio:"" };
+      return { ...state, id:"", name:"", bio:"", status:"", isLogged: false,};
     },
   },
 });
