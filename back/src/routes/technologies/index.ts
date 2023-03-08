@@ -8,7 +8,6 @@ import technologiesGetByUserController from "../../controllers/technologies/tech
 const user = Router();
 
 const technologyRouter = () => {
-  user.get("/");
   user.get("/", authTokenMiddleware, technologiesGetByUserController)
   user.post("/register", authTokenMiddleware, technologiesCreateController);
   user.patch(
